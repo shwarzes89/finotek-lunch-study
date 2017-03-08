@@ -3,8 +3,6 @@ package Perceptron;
 import java.util.ArrayList;
 
 public class Learner {
-	
-	
 	public static void main(String args[]){
 		double alpha  =0.01;
 		ArrayList<TrainingEntity> list = new ArrayList<TrainingEntity>();
@@ -42,13 +40,10 @@ public class Learner {
 			}
 			if(isPass)
 				break;
-			
 		}
 		
 		System.out.println(w[0]+","+ w[1]+","+ w[2]);
-		
 		System.out.println(Validation.valid(list, w));
-			
 	}
 	
 	private static double getDi(double[] w, TrainingEntity e){
