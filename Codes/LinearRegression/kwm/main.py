@@ -35,6 +35,8 @@ def main():
 
     data = get_test_set()
 
+    data.insert(0, 'Ones', 1)
+
     print("\n", data.head(), "\n")
 
     # set X (training data) and y (target variable)
@@ -45,15 +47,11 @@ def main():
     # convert to matrices and initialize theta
     x = np.matrix(x.values)
     y = np.matrix(y.values)
-    w = np.matrix(np.array([0,0,0]))
+    w = np.matrix(np.array([0,0,0,0]))
 
     # perform linear regression on the data set
     g, cost = gradient_descent(x, y, w, 0.0000001, 500)
     print("\n", "weight matrix", g)
-
-    # get the cost (error) of the model
-    print("\n", compute_cost(x, y, g))
-
 
 
 if __name__ == "__main__":
