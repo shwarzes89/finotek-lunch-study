@@ -2,7 +2,7 @@ import numpy as np
 import pandas as pd
 
 def compute_cost(x, y, w):
-    return np.sum(np.power(((x* w.T)- y), 2)) / (2 * len(x))
+    return np.sum(np.power(((x* w.T)- y), 2)) / len(x)
 
 def test_compute_cost():
     x = np.array([1, 2, 3, 4, 5])
@@ -23,35 +23,38 @@ def gradient_descent(x, y, w, learning_rate, iters):
 
         w = temp
         cost[i] = compute_cost(x, y, w)
-        print(w)
+        print("cost ", i , "th : ", cost[i])
 
     return w, cost
 
 
 def get_test_set():
-    return pd.read_csv("data.txt", header=None, names=["q1", "q2", "mid"])
+    return pd.read_csv("data.txt", header=None, names=["q1", "q2", "mid", "final"])
 
 def main():
 
     data = get_test_set()
 
-    # add ones column
-    data.insert(0, 'Ones', 1)
+    print("\n", data.head(), "\n")
 
     # set X (training data) and y (target variable)
     cols = data.shape[1]
-    X2 = data.iloc[:,0:cols-1]
-    y2 = data.iloc[:,cols-1:cols]
+    x = data.iloc[:,0:cols-1]
+    y = data.iloc[:,cols-1:cols]
 
     # convert to matrices and initialize theta
-    X2 = np.matrix(X2.values)
-    y2 = np.matrix(y2.values)
-    theta2 = np.matrix(np.array([0,0,0]))
+    x = np.matrix(x.values)
+    y = np.matrix(y.values)
+    w = np.matrix(np.array([0,0,0]))
 
     # perform linear regression on the data set
-    g2, cost2 = gradient_descent(X2, y2, theta2, 0.0001, 500)
+    g, cost = gradient_descent(x, y, w, 0.0000001, 500)
+    print("\n", "weight matrix", g)
 
-    print(g2)
+    # get the cost (error) of the model
+    print("\n", compute_cost(x, y, g))
+
+
 
 if __name__ == "__main__":
     main()
