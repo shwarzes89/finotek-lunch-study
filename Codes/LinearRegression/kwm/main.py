@@ -18,7 +18,6 @@ def gradient_descent(x, y, w, learning_rate, iters):
         error = (x * w.T) - y
 
         for j in range(parameters):
-            print(x)
             term = np.multiply(error, x[:,j])
             temp[0,j] = w[0,j] - ((learning_rate / len(x)) * np.sum(term))
 
