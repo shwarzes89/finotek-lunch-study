@@ -17,13 +17,14 @@ def gradient_descent(x, y, w, learning_rate, iters):
     for i in range(iters):
         error = (x * w.T) - y
 
+        print(parameters)
         for j in range(parameters):
+            print(x)
             term = np.multiply(error, x[:,j])
             temp[0,j] = w[0,j] - ((learning_rate / len(x)) * np.sum(term))
 
         w = temp
         cost[i] = compute_cost(x, y, w)
-        print("cost ", i , "th : ", cost[i])
 
     return w, cost
 
@@ -35,8 +36,6 @@ def main():
 
     data = get_test_set()
 
-    data.insert(0, 'Ones', 1)
-
     print("\n", data.head(), "\n")
 
     # set X (training data) and y (target variable)
@@ -47,7 +46,7 @@ def main():
     # convert to matrices and initialize theta
     x = np.matrix(x.values)
     y = np.matrix(y.values)
-    w = np.matrix(np.array([0,0,0,0]))
+    w = np.matrix(np.array([0,0,0]))
 
     # perform linear regression on the data set
     g, cost = gradient_descent(x, y, w, 0.0000001, 500)
