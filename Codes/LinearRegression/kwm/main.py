@@ -18,6 +18,7 @@ def gradient_descent(x, y, w, learning_rate, iters):
         error = (x * w.T) - y
 
         for j in range(parameters):
+            print (error, x)
             term = np.multiply(error, x[:,j])
             temp[0,j] = w[0,j] - ((learning_rate / len(x)) * np.sum(term))
 
@@ -47,7 +48,7 @@ def main():
     w = np.matrix(np.array([0,0,0]))
 
     # perform linear regression on the data set
-    g, cost = gradient_descent(x, y, w, 0.0000001, 500)
+    g, cost = gradient_descent(x, y, w, 0.0000001, 100)
     print("\n", "weight matrix", g)
 
 
